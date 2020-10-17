@@ -1,4 +1,4 @@
-import { add_todo, toggle_todo } from "../types";
+import { add_todo, toggle_todo, clear_todo } from "../types";
 
 let counter = 0;
 
@@ -24,7 +24,11 @@ const reducer = (state = [], action) => {
         }
         return todo;
       });
-
+    case clear_todo:
+      return state.filter((todo) => {
+        console.log(state);
+        return todo.completed !== true;
+      });
     default:
       return state;
   }

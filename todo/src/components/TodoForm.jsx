@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { add_todo } from "../redux/types";
+import { addTodo, clearTodo } from "../redux/actions";
 
 const TodoForm = () => {
   const [todo, setTodo] = useState("");
@@ -9,10 +9,12 @@ const TodoForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    return dispatch({
-      type: add_todo,
-      payload: todo,
-    });
+    return dispatch(addTodo(todo));
+  };
+
+  const clearTodos = (e) => {
+    e.preventDefault();
+    dispatch(clearTodo());
   };
 
   return (
@@ -20,6 +22,7 @@ const TodoForm = () => {
       <h2>Add Todos</h2>
       <input type="text" onChange={(e) => setTodo(e.target.value)} />
       <input type="submit" value="Add Todo" />
+      <button onClick={clearTodos}>Clear Completed</button>
     </form>
   );
 };
