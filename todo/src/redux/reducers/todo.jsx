@@ -17,7 +17,10 @@ const reducer = (state = [], action) => {
     case toggle_todo:
       return state.map((todo) => {
         if (todo.id === payload.todo_id) {
-          return (todo.completed = !todo.completed);
+          return {
+            ...todo,
+            completed: !todo.completed,
+          };
         }
         return todo;
       });
