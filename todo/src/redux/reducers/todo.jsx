@@ -1,25 +1,27 @@
+import { add_todo, toggle_todo } from "../types";
+
 let counter = 0;
 
 const reducer = (state = [], action) => {
   const { payload, type } = action;
   switch (type) {
-    case "ADD_TODO":
+    case add_todo:
       return [
         ...state,
         {
-          item: payload.item,
+          item: payload,
           id: ++counter,
           completed: false,
         },
       ];
-    case "TOGGLE_TODO":
+    case toggle_todo:
       return state.map((todo) => {
-        if (todo.id === payload.id) {
-          todo.completed = !todo.completed;
+        if (todo.id === payload.todo_id) {
+          return (todo.completed = !todo.completed);
         }
+        return todo;
       });
-    case "CLEAR_TODO":
-      return state.filter((todo) => todo.completed === false);
+
     default:
       return state;
   }
